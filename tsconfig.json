@@ -4,6 +4,7 @@
         "sourceMap": true,
         "noImplicitAny": true,
         "target": "es5",
+        "lib": ["es5", "es2015.promise", "DOM"],
         "module": "commonjs",
         "moduleResolution": "node",
         "removeComments": true,
@@ -14,6 +15,7 @@
       "**/*.spec.ts"
     ],
     "include": [
-      "src/**/*"
+      "src/**/*",
+      "typings/index.d.ts"
     ]
 }
