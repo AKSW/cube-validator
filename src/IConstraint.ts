@@ -2,6 +2,8 @@ interface IConstraint {
   check(): Promise<IConstraintResult>
 }
 
+export default IConstraint
+
 export enum ConstraintResultType {Valid, Warning, Error};
 
 export interface IConstraintResult {
@@ -22,5 +24,3 @@ export class ConstraintResult implements IConstraintResult {
       }
     }
 }
-
-export default IConstraint

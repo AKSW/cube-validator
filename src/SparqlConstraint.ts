@@ -1,21 +1,31 @@
-import IConstraint, {ConstraintResult, ConstraintResultType} from './IConstraint'
+import {ConstraintResult, ConstraintResultType} from './IConstraint'
+import Constraint from './Constraint'
+
 import * as fetch from 'isomorphic-fetch'
 
-export default class SparqlConstaint implements IConstraint {
+export default class SparqlConstraint extends Constraint {
 
-  readonly endpointUrl: string
-  readonly sparqlQuery: string
-
-  constructor(endpointUrl: string, sparqlQuery: string) {
-    this.endpointUrl = endpointUrl
-    this.sparqlQuery = sparqlQuery
-  }
+  private endpointUrl: string
+  private sparqlQuery: string
 
   check(): Promise<ConstraintResult> {
-    return fetch(this.endpointUrl)
+    return fetch(this.endpointUrl/*, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query: this.sparqlQuery,
+        format: 'text/plain'
+        })
+      }*/)
       .then(response => {
-          // TODO process response
-          return Promise.resolve(new ConstraintResult(ConstraintResultType.Valid, 'test'))
+          return this.resolver.resolve(response)
       })
+  }
+
+  setParameter(parameters: any): void {
+    this.endpointUrl = parameters.endpointUrl as string
+    this.sparqlQuery = parameters.sparqlQuery as string
   }
 }

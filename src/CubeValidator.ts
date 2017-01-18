@@ -1,29 +1,31 @@
 import IValidation from './IValidation'
+import * as constraintClasses from './constraintClasses'
 import IConstraint, {IConstraintResult} from './IConstraint'
-import SparqlConstraint from './SparqlConstraint'
+import IResolve from './IResolve'
+import Constraint from './Constraint'
+// import SparqlConstraint from './SparqlConstraint'
 import queries from './assets/datacubeConstraintQueries'
 
 export default class CubeValidator implements IValidation {
 
-  readonly endpointURL: string
   readonly constraints: IConstraint[]
 
-  constructor(endpointURL: string, constraints?: IConstraint[]) {
-    this.endpointURL = endpointURL
-
-    if (constraints) {
-      this.constraints = constraints
-    } else {
-      this.constraints = this.defaultConstraints()
-    }
+  constructor(config: any[]) {
+      this.constraints = this.createConstraints(config)
   }
 
-  validate(): Promise<IConstraintResult[]> {
+  public validate(): Promise<IConstraintResult[]> {
     const checkPromises = this.constraints.map(constrain => constrain.check())
     return Promise.all(checkPromises)
   }
 
-  defaultConstraints(): IConstraint[] {
-      return queries.map(q => new SparqlConstraint(this.endpointURL, q.query))
+  public createConstraints(config: any[]): IConstraint[] {
+    return config.map(constraintConfig => {
+      const resolveClass: IResolve =
+        new (constraintClasses as any)[constraintConfig.constraintResolver]()
+      const constraintClass: Constraint = new (constraintClasses as any)[constraintConfig.constraintClass](resolveClass)
+      constraintClass.setParameter(constraintConfig.constraintParameter)
+      return constraintClass
+    })
   }
 }
