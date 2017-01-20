@@ -3,15 +3,15 @@ import * as constraintClasses from './constraintClasses'
 import IConstraint, {IConstraintResult} from './IConstraint'
 import IResolve from './IResolve'
 import Constraint from './Constraint'
-// import SparqlConstraint from './SparqlConstraint'
-import queries from './assets/datacubeConstraintQueries'
 
 export default class CubeValidator implements IValidation {
 
-  readonly constraints: IConstraint[]
+  private constraints: IConstraint[]
 
   constructor(config: any[]) {
+    if (config) {
       this.constraints = this.createConstraints(config)
+    }
   }
 
   public validate(): Promise<IConstraintResult[]> {
@@ -28,4 +28,9 @@ export default class CubeValidator implements IValidation {
       return constraintClass
     })
   }
+
+  public setConstraints(constraints: IConstraint[]) {
+    this.constraints = constraints
+  }
+
 }

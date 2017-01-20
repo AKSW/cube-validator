@@ -1,6 +1,5 @@
-import {ConstraintResult, ConstraintResultType} from './IConstraint'
+import {IConstraintResult, ConstraintResult, ConstraintResultType} from './IConstraint'
 import Constraint from './Constraint'
-
 import * as fetch from 'isomorphic-fetch'
 
 export default class SparqlConstraint extends Constraint {
@@ -8,24 +7,39 @@ export default class SparqlConstraint extends Constraint {
   private endpointUrl: string
   private sparqlQuery: string
 
-  check(): Promise<ConstraintResult> {
-    return fetch(this.endpointUrl/*, {
+  check(): Promise<IConstraintResult> {
+    return fetch(this.endpointUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/sparql-query',
+        // Currently application/sparql-query just works with apache jena fuseki:
+        // https://www.mail-archive.com/virtuoso-users@lists.sourceforge.net/msg07983.html
+        Accept: 'application/sparql-results+json'
       },
-      body: JSON.stringify({
-        query: this.sparqlQuery,
-        format: 'text/plain'
-        })
-      }*/)
-      .then(response => {
-          return this.resolver.resolve(response)
-      })
+      body: this.sparqlQuery
+    })
+    .then(response => {
+      if (response.status !== 200) {
+        return Promise.reject(response.status + ': ' + response.statusText)
+      }
+      return this.resolver.resolve(response)
+    })
+    .then(satisfied => {
+        let type: ConstraintResultType = ConstraintResultType.Error
+        if (satisfied) {
+          type = ConstraintResultType.Valid
+        }
+
+        return Promise.resolve(new ConstraintResult(type, this.name + ': ' + this.description))
+    })
+    .catch(err => new ConstraintResult(ConstraintResultType.Error, err))
   }
 
-  setParameter(parameters: any): void {
-    this.endpointUrl = parameters.endpointUrl as string
-    this.sparqlQuery = parameters.sparqlQuery as string
+  setParameter(parameter: any): void {
+
+    super.setParameter(parameter)
+
+    this.endpointUrl = parameter.endpointUrl as string
+    this.sparqlQuery = parameter.sparqlQuery as string
   }
 }

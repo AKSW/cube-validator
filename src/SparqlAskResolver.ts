@@ -1,10 +1,11 @@
 import IResolve from './IResolve'
-import {IConstraintResult} from './IConstraint'
 
 export default class SparqlAskResolver implements IResolve {
-  resolve(response: any): IConstraintResult {
-    // TODO process response
-    console.log(response)
-    return null
+  resolve(response: IResponse): Promise<boolean> {
+    return response.json()
+      .then(json => {
+        // is satisfied when false
+        return json.boolean === false
+      })
   }
 }
