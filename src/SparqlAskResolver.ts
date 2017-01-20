@@ -5,7 +5,7 @@ export default class SparqlAskResolver implements IResolve {
     return response.json()
       .then(json => {
         // is satisfied when false
-        return json.boolean === false
+        return Promise.resolve(json.boolean === false)
       })
   }
 }
