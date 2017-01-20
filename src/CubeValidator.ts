@@ -8,7 +8,7 @@ export default class CubeValidator implements IValidation {
 
   private constraints: IConstraint[]
 
-  constructor(config: any[]) {
+  constructor(config?: any[]) {
     if (config) {
       this.constraints = this.createConstraints(config)
     }
@@ -33,4 +33,9 @@ export default class CubeValidator implements IValidation {
     this.constraints = constraints
   }
 
+  public addClasses(classes: any[]) {
+    classes.forEach(cls => {
+      (constraintClasses as any)[new cls().constructor.name] = cls
+    })
+  }
 }
