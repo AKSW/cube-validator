@@ -1,0 +1,5 @@
+validator:
+  container_name: validator
+  build: ./
+  volumes:
+    - /path/to/folder:/app
