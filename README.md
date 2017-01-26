@@ -18,7 +18,6 @@ const validator = new CubeValidator(config);
 validator.validate(results => {
   console.log(results)
 });
-
 ```
 
 ### Docker
