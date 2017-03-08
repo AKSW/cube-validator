@@ -45,6 +45,7 @@
     "webpack-node-externals": "^1.5.4"
   },
   "dependencies": {
-    "isomorphic-fetch": "^2.2.1"
+    "isomorphic-fetch": "^2.2.1",
+    "underscore": "^1.8.3"
   }
 }

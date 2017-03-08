@@ -4,6 +4,32 @@ interface IConstraint {
 
 export default IConstraint
 
+export interface IConstraintResultsSummary {
+  readonly valid: IConstraintResult[]
+  readonly warning: IConstraintResult[]
+  readonly error: IConstraintResult[]
+}
+
+export class ConstraintResultsSummary implements IConstraintResultsSummary {
+  readonly valid: IConstraintResult[] = []
+  readonly warning: IConstraintResult[] = []
+  readonly error: IConstraintResult[] = []
+
+  constructor (valid?: IConstraintResult[], warning?: IConstraintResult[], error?: IConstraintResult[]) {
+    if (valid) {
+      this.valid = valid
+    }
+
+    if (warning) {
+      this.warning = warning
+    }
+
+    if (error) {
+      this.error = error
+    }
+  }
+}
+
 export enum ConstraintResultType {Valid, Warning, Error};
 
 export interface IConstraintResult {

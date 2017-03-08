@@ -49,11 +49,20 @@ it('should read query config JSON and create correct constraint and resolver typ
 
 });
 
-it("should fulfill all constraints: one valid and one error", function () {
-    const validator = new CubeValidator(testConstraints);
+it("should fulfill error constraint", function () {
+    const validator = new CubeValidator([testConstraints[1]]);
     return assert.isFulfilled(validator.validate().then(res => {
-        assert.strictEqual(res[0].type, 0)
-        assert.strictEqual(res[1].type, 2)
+
+        // assert.property(res, 'valid');
+        // assert.property(res, 'warning');
+        assert.property(res, 'error');
+
+
+        // assert.strictEqual(res.valid.length, 1)
+        assert.strictEqual(res.error.length, 1)
+        // assert.strictEqual(res.warning.length, 1)
+
+        console.log(res);
     }))
 });
 
@@ -66,6 +75,6 @@ it("should load resolver class during runtime", function() {
 
     validator.setConstraints(constraints)
     return assert.isFulfilled(validator.validate().then(res => {
-      assert.strictEqual(res[0].type, 2)
+      assert.strictEqual(res.error.length, 1)
     }))
 })

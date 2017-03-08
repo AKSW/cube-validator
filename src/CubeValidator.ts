@@ -1,8 +1,15 @@
 import IValidation from './IValidation'
 import * as constraintClasses from './constraintClasses'
-import IConstraint, {IConstraintResult} from './IConstraint'
+import IConstraint, {
+  IConstraintResult,
+  ConstraintResultType,
+  IConstraintResultsSummary,
+  ConstraintResultsSummary
+} from './IConstraint'
 import IResolve from './IResolve'
 import Constraint from './Constraint'
+
+import * as _ from 'underscore'
 
 export default class CubeValidator implements IValidation {
 
@@ -14,9 +21,13 @@ export default class CubeValidator implements IValidation {
     }
   }
 
-  public validate(): Promise<IConstraintResult[]> {
+  public validate(): Promise<IConstraintResultsSummary> {
     const checkPromises = this.constraints.map(constrain => constrain.check())
     return Promise.all(checkPromises)
+      .then(constraintResults => {
+
+        return this.mapResults(constraintResults)
+      })
   }
 
   public createConstraints(config: any[]): IConstraint[] {
@@ -37,5 +48,28 @@ export default class CubeValidator implements IValidation {
     classes.forEach(cls => {
       (constraintClasses as any)[new cls().constructor.name] = cls
     })
+  }
+
+  private mapResults(constraintResults: IConstraintResult[]): IConstraintResultsSummary {
+    const mapped: any = _.groupBy(constraintResults, res => {
+      if (res.type === ConstraintResultType.Valid) {
+        return 'valid'
+      } else if (res.type === ConstraintResultType.Warning) {
+        return 'warning'
+      } else {
+        return 'error'
+      }
+    })
+    // fill results up,
+    // TODO it is better to use reduce for the whole mapping
+    // but there were problems with underscore.js typings
+
+    const result: ConstraintResultsSummary = new ConstraintResultsSummary(
+      mapped.valid,
+      mapped.warning,
+      mapped.error
+    )
+
+    return result
   }
 }

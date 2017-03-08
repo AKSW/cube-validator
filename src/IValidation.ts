@@ -1,7 +1,7 @@
-import {IConstraintResult} from './IConstraint'
+import {IConstraintResultsSummary} from './IConstraint'
 
 interface IValidation {
-    validate(): Promise<IConstraintResult[]>
+    validate(): Promise<IConstraintResultsSummary>
 }
 
 export default IValidation
