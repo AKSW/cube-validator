@@ -3,3 +3,5 @@ validator:
   build: ./
   volumes:
     - /path/to/folder:/app
+  ports:
+    - 3030
