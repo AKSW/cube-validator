@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
+    "postinstall": "typings install",
     "lint": "tslint 'src/**/*.ts'",
     "build:browser": "rimraf dist/* && browserify --standalone CubeValidation -p tsify src/index.ts > dist/cubeValidation.js",
     "build:node": "rimraf dist/* && tsc --p tsconfig_test.json",

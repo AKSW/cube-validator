@@ -15,6 +15,6 @@ COPY validate.js /validate/validate.js
 
 VOLUME /app
 
-RUN git clone https://github.com/AKSW/cube-validator.git $PROJECT
+RUN npm install -g typings 
 
 CMD ["/run.sh"]

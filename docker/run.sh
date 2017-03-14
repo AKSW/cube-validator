@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git clone https://github.com/AKSW/cube-validator.git $PROJECT
+
 cd $PROJECT
 
 npm install
