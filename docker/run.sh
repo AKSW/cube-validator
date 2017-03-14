@@ -3,7 +3,7 @@
 cd $PROJECT
 
 npm install
-npm run build
+npm run build:node
 PROJECT_FILE=$(npm pack)
 
 cd $VALIDATE

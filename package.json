@@ -6,8 +6,9 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "lint": "tslint 'src/**/*.ts'",
-    "build": "rimraf dist/* && browserify --standalone CubeValidation -p tsify src/index.ts > dist/cubeValidation.js",
-    "test": "npm run lint && rimraf dist/* && tsc --p tsconfig_test.json && mocha-webpack --webpack-config webpack.config-test.js \"test/*\""
+    "build:browser": "rimraf dist/* && browserify --standalone CubeValidation -p tsify src/index.ts > dist/cubeValidation.js",
+    "build:node": "rimraf dist/* && tsc --p tsconfig_test.json",
+    "test": "npm run lint && npm run build:node && mocha-webpack --webpack-config webpack.config-test.js \"test/*\""
   },
   "repository": {
     "type": "git",
