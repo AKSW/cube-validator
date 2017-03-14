@@ -1,6 +1,5 @@
 node_modules/
 typings/
-dist/*
 .DS_Store
 npm-debug.log
 .tmp/
