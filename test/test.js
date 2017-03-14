@@ -6,7 +6,7 @@ chai.use(chaiAsPromised);
 
 import SparqlConstraint from '../dist/SparqlConstraint.js'
 import SparqlAskResolver from '../dist/SparqlAskResolver.js'
-import CubeValidator from '../dist'
+import CubeValidator from '../dist/CubeValidator.js'
 
 class NoResolver extends SparqlAskResolver {
   resolve(response) {
@@ -62,7 +62,6 @@ it("should fulfill error constraint", function () {
         assert.strictEqual(res.error.length, 1)
         // assert.strictEqual(res.warning.length, 1)
 
-        console.log(res);
     }))
 });
 

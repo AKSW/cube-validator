@@ -1,12 +1,10 @@
 import IValidation from './IValidation'
 import * as constraintClasses from './constraintClasses'
-import IConstraint, {
-  IConstraintResult,
-  ConstraintResultType,
-  IConstraintResultsSummary,
-  ConstraintResultsSummary
-} from './IConstraint'
+import IConstraint from './IConstraint'
 import IResolve from './IResolve'
+import IConstraintResult, {ConstraintResultType} from './IConstraintResult'
+import IConstraintResultsSummary from './IConstraintResultsSummary'
+import ConstraintResultsSummary from './ConstraintResultsSummary'
 import Constraint from './Constraint'
 
 import * as _ from 'underscore'

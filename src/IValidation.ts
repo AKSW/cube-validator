@@ -1,4 +1,4 @@
-import {IConstraintResultsSummary} from './IConstraint'
+import IConstraintResultsSummary from './IConstraintResultsSummary'
 
 interface IValidation {
     validate(): Promise<IConstraintResultsSummary>

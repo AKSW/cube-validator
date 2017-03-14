@@ -5,7 +5,8 @@
         "noImplicitAny": true,
         "target": "es5",
         "lib": ["es5", "es2015.promise", "DOM"],
-        "module": "UMD",
+        "module": "commonjs",
+        "moduleResolution": "node",
         "removeComments": true,
         "outDir": "dist/"
     },

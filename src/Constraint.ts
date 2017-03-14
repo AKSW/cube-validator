@@ -1,4 +1,5 @@
-import IConstraint, {IConstraintResult} from './IConstraint'
+import IConstraint from './IConstraint'
+import IConstraintResult from './IConstraintResult'
 import IResolve from './IResolve'
 
 abstract class Constraint implements IConstraint {

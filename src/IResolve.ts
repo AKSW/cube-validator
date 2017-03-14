@@ -1,4 +1,4 @@
-import IConstraint, {IConstraintResult} from './IConstraint'
+import IConstraint from './IConstraint'
 
 interface IResolve {
   resolve(response: any): Promise<boolean>
