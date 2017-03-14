@@ -7,6 +7,23 @@ Our predefined constraints are taken from the [W3C well-formed cubes note](https
 Usage
 -----
 
+### In Browser
+
+Build a bundled JavaScript file with `npm run build:browser` and use this file in your HTML code.
+
+```
+<script src="dist/cubeValidation.js"></script>
+<script>
+  var constraints = [/* Your json constraints */]
+
+   var validator = new CubeValidation.CubeValidator(constraints);
+   validator.validate().then(results => {
+     console.log(results);
+   });
+
+  </script>
+```
+
 ### In Code
 
 ```
