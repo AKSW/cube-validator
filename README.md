@@ -14,14 +14,15 @@ Build a bundled JavaScript file with `npm run build:browser` and use this file i
 ```
 <script src="dist/cubeValidation.js"></script>
 <script>
+
   var constraints = [/* Your json constraints */]
 
-   var validator = new CubeValidation.CubeValidator(constraints);
-   validator.validate().then(results => {
-     console.log(results);
-   });
+  var validator = new CubeValidation.CubeValidator(constraints);
+  validator.validate().then(results => {
+    console.log(results);
+  });
 
-  </script>
+</script>
 ```
 
 ### In Code
