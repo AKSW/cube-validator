@@ -2,7 +2,7 @@ import Constraint from './Constraint'
 import ConstraintResult from './ConstraintResult'
 import IConstraintResult from './IConstraintResult'
 import {ConstraintResultType} from './IConstraintResult'
-import * as fetch from 'isomorphic-fetch'
+import 'isomorphic-fetch'
 
 export default class SparqlConstraint extends Constraint {
 

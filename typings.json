@@ -1,6 +1,6 @@
 {
   "globalDependencies": {
-    "isomorphic-fetch": "registry:dt/isomorphic-fetch#0.0.0+20160915014424",
+    "isomorphic-fetch": "registry:dt/isomorphic-fetch#0.0.0+20170223183302",
     "underscore": "registry:dt/underscore#1.8.3+20161123125004"
   }
 }
