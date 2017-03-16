@@ -16,7 +16,7 @@
     "url": "git+https://github.com/AKSW/cube-valdiator.git"
   },
   "files": [
-    "dist/"
+    "dist",
     "typings.json"
   ],
   "keywords": [
