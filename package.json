@@ -1,7 +1,7 @@
 {
-  "name": "cube-validator.js",
+  "name": "cube-validator",
   "version": "0.1.0",
-  "description": "",
+  "description": "The project aims to make the validation of data cubes more easier.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
@@ -17,6 +17,7 @@
   },
   "files": [
     "dist/"
+    "typings.json"
   ],
   "keywords": [
     "datacube",
